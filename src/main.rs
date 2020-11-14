@@ -8,6 +8,7 @@ fn main() {
     //Renderer
     println!("P3");
     println!("{} {}", IMAGE_WIDTH, IMAGE_WIDTH);
+    println!("255");
 
     for j in (0..IMAGE_HEIGHT).rev() {
         
