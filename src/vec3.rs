@@ -7,6 +7,7 @@ pub struct Vec3 {
 
 impl Vec3 {
 
+    // Static functions
     pub fn new() -> Vec3{
         Vec3{e : [0.0, 0.0, 0.0] }
     }
@@ -15,12 +16,38 @@ impl Vec3 {
         Vec3{ e : [x, y, z] }
     }
 
+    pub fn dot(u: &Vec3, v: &Vec3) -> f64{
+        u.e[0] * v.e[0] + u.e[1] * v.e[1] + u.e[2] * v.e[2]
+    }
+
+    pub fn cross(u: &Vec3, v: &Vec3) -> Vec3{
+        Vec3::with_values(
+            u.e[1] * v.e[2] - u.e[2] * v.e[1],
+            u.e[2] * v.e[0] - u.e[0] * v.e[2],
+            u.e[0] * v.e[1] - u.e[1] * v.e[0]
+        )
+    }
+
+    pub fn unit_vector(v: &Vec3) -> Vec3 {
+        let length = v.len();
+        Vec3::with_values(
+            v[0] / length,
+            v[1] / length,
+            v[2] / length,
+        )
+    }
+
+    // Instance functions
     fn length_squared(&self) -> f64 {
         self.e[0]*self.e[0] + self.e[1]*self.e[1] + self.e[2]*self.e[2]
     }
 
     pub fn len(&self) -> f64 {
         self.length_squared().sqrt()
+    }
+
+    pub fn to_string(&self) -> String {
+        format!("{} {} {}", self.e[0], self.e[1], self.e[2])
     }
 
 }
