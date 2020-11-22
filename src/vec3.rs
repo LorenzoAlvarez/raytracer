@@ -1,6 +1,6 @@
 use std::ops::*;
 use std::f64;
-
+#[derive(Clone, Copy, Debug)]
 pub struct Vec3 {
     pub e : [f64; 3],
 }
@@ -84,6 +84,57 @@ impl Sub for Vec3 {
                 self.e[1] - other.e[1],
                 self.e[2] - other.e[2]]
         }
+    }
+}
+
+impl Mul for Vec3 {
+    type Output = Vec3;
+
+    fn mul(self, other: Vec3) -> Vec3 {
+        Vec3::with_values(
+            self[0] * other[0],
+            self[1] * other[1],
+            self[2] * other[2]
+        )
+    }
+}
+
+impl Mul<Vec3> for f64 {
+    type Output = Vec3;
+  
+    fn mul(self, v: Vec3) -> Vec3 {
+      Vec3 { e: [self * v.e[0], self * v.e[1], self * v.e[2]] }
+    }
+}
+
+impl Mul<f64> for Vec3 {
+    type Output = Vec3;
+  
+    fn mul(self, t: f64) -> Vec3 {
+      Vec3 { e: [self.e[0] * t, self.e[1] * t, self.e[2] * t] }
+    }
+}
+
+impl Div for Vec3 {
+    type Output = Vec3;
+
+    fn div(self, other: Vec3) -> Vec3 {
+        Vec3::with_values(
+            self[0] / other[0],
+            self[1] / other[1],
+            self[2] / other[2]
+        )
+    }
+}
+
+impl Div<f64> for Vec3 {
+    type Output = Vec3;
+
+    fn div(self, t: f64) -> Vec3 {
+        Vec3::with_values(
+            self[0] / t,
+            self[1] / t,
+            self[2] / t)
     }
 }
 
